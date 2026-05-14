@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Leftover Food Redistribution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <header class="glass-header">
+        <div class="container nav-container">
+            <a href="#" class="logo" onclick="app.navigate('home')">
+                <i class="fa-solid fa-leaf"></i> ShareBite
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-target="home" onclick="app.navigate('home')">Home</a></li>
+                    <li><a href="#" class="nav-link" data-target="donate" onclick="app.navigate('donate')">Donate Food</a></li>
+                    <li><a href="#" class="nav-link" data-target="feed" onclick="app.navigate('feed')">Food Feed</a></li>
+                </ul>
+            </nav>
+            <button class="btn btn-primary nav-btn" onclick="app.navigate('donate')">Donate Now</button>
+            <button class="mobile-menu-btn" onclick="app.toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <div class="container hero-container">
+                <div class="hero-content fade-in-up">
+                    <span class="badge">Zero Waste Initiative</span>
+                    <h1>Bridging the Gap Between <span class="highlight">Surplus</span> and <span class="highlight">Scarcity</span></h1>
+                    <p>Connect real-time food donors with NGOs and volunteers. Let's redirect edible surplus from restaurants and events to those who need it most, reducing both hunger and environmental impact.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-lg" onclick="app.navigate('donate')">I Have Food to Donate</button>
+                        <button class="btn btn-secondary btn-lg" onclick="app.navigate('feed')">I Want to Volunteer</button>
+                    </div>
+                </div>
+                <div class="hero-image fade-in-up" style="animation-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1593113565241-471a25bc2b4b?auto=format&fit=crop&w=800&q=80" alt="Volunteers distributing food" class="glass-img">
+                    <div class="floating-card glass-card">
+                        <div class="card-icon"><i class="fa-solid fa-bell"></i></div>
+                        <div class="card-text">
+                            <strong>New Alert!</strong>
+                            <span>50 servings available nearby</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container impact-container fade-in-up" style="animation-delay: 0.4s;">
+                <h2 class="section-title text-center">Our Global Impact</h2>
+                <div class="impact-grid">
+                    <div class="impact-card glass-card">
+                        <i class="fa-solid fa-utensils impact-icon text-accent-1"></i>
+                        <h3 class="counter" data-target="15420">0</h3>
+                        <p>Meals Rescued</p>
+                    </div>
+                    <div class="impact-card glass-card">
+                        <i class="fa-solid fa-users impact-icon text-accent-2"></i>
+                        <h3 class="counter" data-target="3200">0</h3>
+                        <p>Active Volunteers</p>
+                    </div>
+                    <div class="impact-card glass-card">
+                        <i class="fa-solid fa-leaf impact-icon text-primary"></i>
+                        <h3><span class="counter" data-target="25">0</span> Tons</h3>
+                        <p>CO₂ Reduced</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donate Section -->
+        <section id="donate" class="page-section">
+            <div class="container form-container">
+                <div class="form-wrapper glass-card fade-in-up">
+                    <div class="form-header">
+                        <h2>Donate Surplus Food</h2>
+                        <p>Fill out the details below to notify nearby NGOs and volunteers.</p>
+                    </div>
+                    <form id="donation-form" onsubmit="app.handleDonationSubmit(event)">
+                        <div class="form-group">
+                            <label for="donor-name">Organization / Donor Name</label>
+                            <input type="text" id="donor-name" required placeholder="e.g. Royal Caterers">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="food-type">Food Type</label>
+                                <select id="food-type" required>
+                                    <option value="" disabled selected>Select type</option>
+                                    <option value="Cooked Meals">Cooked Meals</option>
+                                    <option value="Raw Ingredients">Raw Ingredients</option>
+                                    <option value="Packaged Food">Packaged Food</option>
+                                    <option value="Bakery Items">Bakery Items</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity (Servings)</label>
+                                <input type="number" id="quantity" required min="1" placeholder="e.g. 50">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-time">Pick-up Window (Before Expiry)</label>
+                                <input type="time" id="expiry-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location / Address</label>
+                                <input type="text" id="location" required placeholder="e.g. Downtown Ave, Block C">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="instructions">Additional Instructions</label>
+                            <textarea id="instructions" rows="3" placeholder="Any special packaging or pickup details..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Post Donation Alert</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feed Section -->
+        <section id="feed" class="page-section">
+            <div class="container feed-container">
+                <div class="feed-header fade-in-up">
+                    <h2>Live Food Alerts</h2>
+                    <p>Available surplus food in your area waiting to be claimed.</p>
+                    <div class="feed-filters">
+                        <span class="badge active">All</span>
+                        <span class="badge">Cooked Meals</span>
+                        <span class="badge">Raw Ingredients</span>
+                    </div>
+                </div>
+                <div id="food-feed-grid" class="feed-grid fade-in-up" style="animation-delay: 0.2s;">
+                    <!-- Cards will be injected by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content glass-card scale-in">
+            <div class="modal-icon success"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Donation Posted!</h2>
+            <p>Thank you for contributing. Nearby volunteers have been notified and will claim your food shortly.</p>
+            <button class="btn btn-primary" onclick="app.closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
