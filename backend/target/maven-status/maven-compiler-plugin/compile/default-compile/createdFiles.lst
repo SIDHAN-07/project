@@ -1,0 +1,6 @@
+com/foodredistribution/controller/FoodController.class
+com/foodredistribution/repository/DonationRepository.class
+com/foodredistribution/model/Donation.class
+com/foodredistribution/model/ImpactStats.class
+com/foodredistribution/FoodRedistributionApplication.class
+com/foodredistribution/repository/ImpactStatsRepository.class
